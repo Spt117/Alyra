@@ -3,5 +3,5 @@
 pragma solidity 0.8.14;
 
 contract Whitelist {
-
+        mapping (address => bool) whitelist ;
 }
