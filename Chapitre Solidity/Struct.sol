@@ -8,6 +8,10 @@ contract Whitelist {
         uint256 age;
     }
 
+    // function addPerson(string memory _name, uint256 _age) public {
+    //     Person memory person = Person(_name, _age);
+    // }
+
     function addPerson(string memory _name, uint256 _age) public {
         Person memory person;
         person.name = _name;

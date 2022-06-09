@@ -9,14 +9,14 @@ contract Whitelist {
         uint256 age;
     }
 
-    Person[] public persons; //tableau public de type porsonne
+    Person[] public persons; //tableau public de type Person
 
     function add(string memory _name, uint256 _age) public {
-        Person memory person = Person(_name, _age);
-        persons.push(person);
+        Person memory person = Person(_name, _age); // Création d'un nouvel objet
+        persons.push(person); // Ajout de l'ojet au tableau
     }
 
     function remove() public {
-        persons.pop();
+        persons.pop(); // Supression du dernier objet dans le tableau
     }
 }
