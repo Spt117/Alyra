@@ -13,7 +13,7 @@ contract Whitelist {
 
     function add(string memory _name, uint256 _age) public {
         Person memory person = Person(_name, _age); // Création d'un nouvel objet
-        persons.push(person); // Ajout de l'ojet au tableau
+        persons.push(person); // Ajout de l'objet au tableau
     }
 
     function remove() public {
