@@ -1,21 +1,25 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity 0.8.14;
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/access/Ownable.sol";
+pragma solidity 0.8.9;
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
 contract Voting is Ownable {
     struct Voter {
         bool isRegistered;
         bool hasVoted;
         uint256 votedProposalId;
-        address addr;
+        address voterAddress;           //ajout d'une addresse pour les électeurs 
     }
+    Voter[] public voters;              //tableau pour stocker les électeurs
+
 
 
     struct Proposal {
         string description;
         uint256 voteCount;
     }
+
+
 
     enum WorkflowStatus {
         RegisteringVoters,
@@ -25,8 +29,11 @@ contract Voting is Ownable {
         VotingSessionEnded,
         VotesTallied
     }
+    WorkflowStatus public statut;          
 
-    event VoterRegistered(address voterAddress);
+
+
+    event VoterRegistered(address _voterAddress);
     event WorkflowStatusChange(WorkflowStatus previousStatus, WorkflowStatus newStatus);
     event ProposalRegistered(uint256 proposalId);
     event Voted(address voter, uint256 proposalId);
@@ -35,6 +42,14 @@ contract Voting is Ownable {
 
     //admin enregistre les électeurs avec leur addresse eth
 
+    function registered(address _voterAddress) public OnlyOwner{
+        voters.push(Voter(true, false, 0, _voterAddress));      //enregistrement
+        emit VoterRegistered(_voterAddress);                   //déclenchement de l'event enregistrement
+    }
+
+    function setStatutRegisteringVoters() external OnlyOwner {
+        statut=WorkflowStatus.RegisteringVoters;
+    }
 
 
 
