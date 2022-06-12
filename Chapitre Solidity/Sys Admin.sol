@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity 0.8.9;
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
+pragma solidity 0.8.10;
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 
 contract Admin is Ownable {

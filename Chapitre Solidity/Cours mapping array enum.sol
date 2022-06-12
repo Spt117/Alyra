@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity 0.8.14;
+pragma solidity 0.8.9;
 
 contract test {
     //mapping(string=>(adress=>apprenant)) Ropsten //Mapping en cascasde
@@ -73,7 +73,7 @@ contract test {
         require (uint (_num)<3, "ce statut n'existe pas");
         statut = _num;
 
-    }
+    } 
 
     function incrementStatut() public {
         require (uint (statut)<2, "ce statut n'existe pas");
