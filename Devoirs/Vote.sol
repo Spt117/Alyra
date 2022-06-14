@@ -11,7 +11,7 @@ contract Voting is Ownable {
         bool hasVoted;
         uint256 votedProposalId; 
     }
-    mapping(address=>Voter) public voters;             //mapping associant les électeurs à leur adresse eth
+    mapping(address=>Voter) public voters;             //mapping associant les électeurs à leur adresse je laisse en public pour que tout le monde puisse voir pour qui chacun vote
     address[] resetvoters;                               //tableau pour stockers les adresses des électeurs et reset en un clic
 
 
@@ -20,9 +20,9 @@ contract Voting is Ownable {
         string description;
         uint256 voteCount;
     }
-    uint public Id  ;                                               //Variable qui va définir proposalId
-    bool public whitevote;                                        //vatiable pour activer ou non le vote blanc
-    mapping(uint=>Proposal) public proposalIds;                   //mapping associant les propositions à leur proposalId
+    uint Id  ;                                               //Variable qui va définir proposalId
+    bool whitevote;                                        //vatiable pour activer ou non le vote blanc
+    mapping(uint=>Proposal) proposalIds;                   //mapping associant les propositions à leur proposalId
      Proposal[] proposalwinners;                           // tableau qui contiendra le ou les vainqueurs
 
     
@@ -36,7 +36,7 @@ contract Voting is Ownable {
         VotingSessionEnded,
         VotesTallied
     }
-    WorkflowStatus public statut;     
+    WorkflowStatus public statut;                           //je laisse en public pour que tout le monde puisse vérifier ou en est la session de vote
     
     function NextStatut() external onlyOwner {                              //fonction pour définir le statut du contrat
        // require (uint (statut)<6, "Ce statut n'existe pas");               //require inutile
