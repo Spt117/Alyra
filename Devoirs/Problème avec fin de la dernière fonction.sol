@@ -20,10 +20,10 @@ contract Voting is Ownable {
         string description;
         uint256 voteCount;
     }
-    uint Id;                                               //Variable qui va définir proposalId                     public pour vérifier contrat
-    bool whitevote;                                        //vatiable pour activer ou non le vote blanc             public pour vérifier contrat
-    mapping(uint=>Proposal) proposalIds;                   //mapping associant les propositions à leur proposalId   public pour vérifier contrat
-    Proposal[] proposalwinners;                           // tableau qui contiendra le ou les vainqueurs            
+    uint Id  ;                                               //Variable qui va définir proposalId
+    bool whitevote;                                        //vatiable pour activer ou non le vote blanc
+    mapping(uint=>Proposal) proposalIds;                   //mapping associant les propositions à leur proposalId
+     Proposal[] proposalwinners;                           // tableau qui contiendra le ou les vainqueurs
 
     
 
@@ -51,10 +51,10 @@ contract Voting is Ownable {
         else {
             emit WorkflowStatusChange(WorkflowStatus (uint (statut)-1), WorkflowStatus(uint(statut)));
             } 
-        if(statut==WorkflowStatus.ProposalsRegistrationEnded && whitevote==false){                //Le vote blanc est enregistré en tant que proposition
-            proposalIds[Id]=Proposal("Vote blanc", 0);                                           //on rajoute le vote blanc en cas d'égalité avec lui
-        }      
-    }                                                                                           
+        if(statut==WorkflowStatus.ProposalsRegistrationStarted && whitevote==false){            //Le vote blanc est enregistré en tant que proposition
+            proposalIds[0]=Proposal("Vote blanc", 0);                                           //on rajoute le vote blanc en cas d'égalité avec lui
+        }    
+    }     
 
     event VoterRegistered(address _voterAddress);
     event WorkflowStatusChange(WorkflowStatus previousStatus, WorkflowStatus newStatus);
@@ -83,13 +83,13 @@ contract Voting is Ownable {
         require(!voters[_voterAddress].isRegistered, 
         "Cet electeur est deja enregistre");                                   //vérification que l'électeur n'est pas enregistré
 
+        //voters.push(Voter(true, false, 0, _voterAddress));                   //enregistrement avec tableau
         voters[_voterAddress]=Voter(true, false, 0);                           //enregistrement du voter avec mapping
         resetvoters.push(_voterAddress);                                        //enregistrement des adresses électeurs dans le tableau
         emit VoterRegistered(_voterAddress);                                   //déclenchement de l'event enregistrement électeur
     }
 
-    //J'ajoute en bonus une fonction pour retirer un électeur
-    function unregistered(address _voterAddress) external onlyOwner{           
+    function unregistered(address _voterAddress) external onlyOwner{
         require(statut==WorkflowStatus.RegisteringVoters, 
         "Vous ne pouvez pas retirer de votant pour le moment !");             //vérification du statut
         require(voters[_voterAddress].isRegistered, 
@@ -110,7 +110,7 @@ contract Voting is Ownable {
         //proposals.push(Proposal(_description, 0));                           //l'électeur enregistre sa proposition en array
         //voters[msg.sender].votedProposalId=;                                 //donner à votedProposalId l'index de la proposal
         Id++;                                                                  //Incrémentation de l'Id pour que propsalId commence à 1
-        proposalIds[Id-1]=Proposal(_description, 0);                            //l'électeur enregistre sa proposition en mapping
+        proposalIds[Id]=Proposal(_description, 0);                            //l'électeur enregistre sa proposition en mapping
         //proposals.push(proposalIds[Id]);                                        //On remplis le tableau avec les votes des proposals
         emit ProposalRegistered(Id);                                          //Déclenchement de l'event enregistrement proposition
         
@@ -119,14 +119,6 @@ contract Voting is Ownable {
 
 
     //admin met fin à la session d'enregistrement
-    //ajout d'une fonction pour supprimer une proposition (si des propositions sont trop similaires)
-    function deleteproposal(uint _id) external onlyOwner{
-        require(statut==WorkflowStatus.ProposalsRegistrationEnded,           //vérification du statut
-        "Vous ne pouvez pas supprimer de proposition pour le moment !");
-        proposalIds[_id]=Proposal("", 0);
-
-    }
-
     //admin commence session de vote
 
     //électeurs inscrits votent pour leur proposition préférée
@@ -136,8 +128,8 @@ contract Voting is Ownable {
         "Vous ne pouvez pas voter pour le moment !");
         require(voters[msg.sender].hasVoted==false,                              //vérification que l'électeur n'a pas déjà voté
         "Vous avez deja vote !");
-        require(keccak256(abi.encodePacked(proposalIds[_proposalId].description))!=keccak256(abi.encodePacked("")),                                                  //vérification que la proposition existe
-        "Cette proposition n'est pas valide");                                   //on vérifie que la proposition est valide
+        require(_proposalId<Id+1,                                                  //vérification que la proposition existe
+        "Cette proposition n'est pas valide");                                   //0 est le vote blanc mis en place avec le statut
 
         proposalIds[_proposalId].voteCount++;                                     //on incrémente le vote de la proposition  
         voters[msg.sender]=Voter(true, true, _proposalId);                        //l'électeur a voté et on indique son vote
@@ -182,10 +174,10 @@ contract Voting is Ownable {
             }
         }
 
-        if (proposalIds[Id].voteCount==proposalIds[winner].voteCount){
-               whitevote=true;                                                  //on prend le vote blanc en compte en cas d'égalité 
+        if (proposalIds[0].voteCount==proposalIds[winner].voteCount){
+               whitevote=true;
             }
-            else {whitevote=false;}                                             
+            else {whitevote=false;}
         
         return proposalwinners;                                                 //L'administrateur peut regarder le résultat avant les autres 
     }                                                                           //(faut bien des avantages mais on peut lui enlever^^)
@@ -225,7 +217,9 @@ contract Voting is Ownable {
         
         for (uint i; i<Id+1;i++){proposalIds[i]=Proposal("", 0);}                 //on reset les Proposal qui ont été enregistrées
         Id =0;
-               
+        
+       
+       
         if (_winners==false){
             delete proposalwinners;                                                 //si pas d'égalité, on reset winners 
             whitevote=false;                                                        // si le gagnant était seulement le vote blanc, on le repasse en false
@@ -233,9 +227,19 @@ contract Voting is Ownable {
         else{            
             uint resetwinners;                                                      //si égalité, on renvoie les propositions gagnantes
             resetwinners=proposalwinners.length;                                    //dans le tableau des propositions
-            for(uint i;i<resetwinners;i++){           
-            proposalIds[Id].description=proposalwinners[i].description;
-            Id++;}
+            
+            if (whitevote=true){                                                   //s'il y a eu vote blanc dans les gagnantes, on le prend en compte pour la suite avec Id-1
+                for(uint i;i<resetwinners;i++){ 
+                Id++;
+                proposalIds[Id-1].description=proposalwinners[i].description;}                                                                               
+            }
+
+            else{                                                                       //s'il n'y a pas de vote blanc, j'enregistre les proposals à partir de 1 
+                for(uint i;i<resetwinners;i++){                                         //le vote blanc sera rajouté en passant à l'enregistrement                
+                    Id++;                                                           
+                    proposalIds[Id].description=proposalwinners[i].description;}        //ne fonctionne pas, il semble y avoir un conflit avec remix, quand je supprime else ça fonctionne
+            }                                                                           // ou alors un truc m'échappe, en théorie ça devrait être bon 
+            
             delete proposalwinners;
         }
     }
