@@ -1,24 +1,23 @@
 // SPDX-License-Identifier: GPL-3.0
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 
 pragma solidity 0.8.13;
 
 contract SimpleStorage {
 
-    uint256 number;
+    uint storageData;
 
-    /**
-     * @dev Store value in variable
-     * @param num value to store
-     */
-    function store(uint256 num) public {
-        number = num;
+    constructor(uint _num) payable{
+        set(_num);
     }
 
-    /**
-     * @dev Return value 
-     * @return value of 'number'
-     */
-    function retrieve() public view returns (uint256){
-        return number;
+    function get() public view returns (uint) {
+        return storageData;
     }
+
+    function set(uint _num) public {
+        storageData = _num;
+    }
+
 }
