@@ -62,8 +62,12 @@ contract('Voting', accounts => {
         });
         
         it("...should revert because of OnlyVoters", async () => {      
-            await VotingInstance.addVoter(voter, {from: owner });     
             await expectRevert(VotingInstance.getVoter(voter, {from: other }),"You're not a voter");
+        });
+
+        it("...should revert because of OnlyVoters", async () => {      
+            await VotingInstance.addVoter(voter, {from: owner });     
+            await expectRevert(VotingInstance.addVoter(voter, {from: owner }),"Already registered");
         });
 
         it("...should revert because of bad workflowstatus", async () => {
@@ -124,6 +128,10 @@ contract('Voting', accounts => {
         it("...should revert because of OnlyVoters", async () => {           
             await expectRevert(VotingInstance.addProposal("proposition 1", {from: other}),"You're not a voter");
         }); 
+
+        it("...should revert because of OnlyVoters", async () => {           
+            await expectRevert(VotingInstance.getOneProposal(1, {from: other}),"You're not a voter");
+        });
         
         it("...should revert because of bad workflowstatus", async () => {
             await VotingInstance.endProposalsRegistering({from: owner});
@@ -198,9 +206,6 @@ contract('Voting', accounts => {
     });
 
 
-
-
-
     // ::::::::::::: STATE ::::::::::::: //
 
     describe("test of States",  () => {
@@ -215,41 +220,71 @@ contract('Voting', accounts => {
             expect( BN(status)).to.be.bignumber.equal(BN(0));
         });
         
-        // ---- Vérification des changements de status et du onlyOwner ---- //
-        it("...should revert because of Ownable", async () => {
-            await expectRevert(VotingInstance.startProposalsRegistering({ from: other }),"Ownable: caller is not the owner");
-        });
+        // ---- Vérification des changements de status ---- //
+
         it("...should state ProposalsRegistrationStarted", async () => {
             await VotingInstance.startProposalsRegistering({ from: owner });
             const status = await VotingInstance.workflowStatus.call();
             expect( BN(status)).to.be.bignumber.equal(BN(1));
         });
 
-        it("...should revert because of Ownable", async () => {
-            await expectRevert(VotingInstance.endProposalsRegistering({ from: other }),"Ownable: caller is not the owner");
-        });
         it("...should state endProposalsRegistering", async () => {
             await VotingInstance.endProposalsRegistering({ from: owner });
             const status = await VotingInstance.workflowStatus.call();
             expect(BN(status)).to.be.bignumber.equal(BN(2));
         });
 
-        it("...should revert because of Ownable", async () => {
-            await expectRevert(VotingInstance.startVotingSession({ from: other }),"Ownable: caller is not the owner");
-        });
         it("...should state startVotingSession", async () => {
             await VotingInstance.startVotingSession({ from: owner });
             const status = await VotingInstance.workflowStatus.call();
             expect(BN(status)).to.be.bignumber.equal(BN(3));
         });
 
-        it("...should revert because of Ownable", async () => {
-            await expectRevert(VotingInstance.endVotingSession({ from: other }),"Ownable: caller is not the owner");
-        });
         it("...should state endVotingSession", async () => {
             await VotingInstance.endVotingSession({ from: owner });
             const status = await VotingInstance.workflowStatus.call();
             expect(BN(status)).to.be.bignumber.equal(BN(4));
+        });
+      });
+
+
+    describe("test of event and require State",  () => {
+        
+        before (async () => {
+            VotingInstance = await Voting.new({ from: owner});
+        });
+               
+        // ---- Vérification des évènements et du onlyOwner ---- //
+        it("...should revert because of Ownable", async () => {
+            await expectRevert(VotingInstance.startProposalsRegistering({ from: other }),"Ownable: caller is not the owner");
+        });
+        it('...should emit WorkflowStatusChange', async () => {            
+            const status = await VotingInstance.startProposalsRegistering({ from: owner });               
+            expectEvent(status, "WorkflowStatusChange", {previousStatus : BN(0), newStatus : BN(1)});
+        });
+
+        it("...should revert because of Ownable", async () => {
+            await expectRevert(VotingInstance.endProposalsRegistering({ from: other }),"Ownable: caller is not the owner");
+        });
+        it('...should emit WorkflowStatusChange', async () => {            
+            const status = await VotingInstance.endProposalsRegistering({ from: owner });               
+            expectEvent(status, "WorkflowStatusChange", {previousStatus : BN(1), newStatus : BN(2)});
+        });
+
+        it("...should revert because of Ownable", async () => {
+            await expectRevert(VotingInstance.startVotingSession({ from: other }),"Ownable: caller is not the owner");
+        });
+        it('...should emit WorkflowStatusChange', async () => {            
+            const status = await VotingInstance.startVotingSession({ from: owner });               
+            expectEvent(status, "WorkflowStatusChange", {previousStatus : BN(2), newStatus : BN(3)});
+        });
+
+        it("...should revert because of Ownable", async () => {
+            await expectRevert(VotingInstance.endVotingSession({ from: other }),"Ownable: caller is not the owner");
+        });
+        it('...should emit WorkflowStatusChange', async () => {            
+            const status = await VotingInstance.endVotingSession({ from: owner });               
+            expectEvent(status, "WorkflowStatusChange", {previousStatus : BN(3), newStatus : BN(4)});
         });
 
         // ---- Vérification des require par rapport aux status ---- //
@@ -269,7 +304,7 @@ contract('Voting', accounts => {
             await expectRevert(VotingInstance.endVotingSession({ from: owner }),"Voting session havent started yet");
         });
 
-      });
+      });      
 
 
     // ::::::::::::: TALLYVOTES ::::::::::::: //
