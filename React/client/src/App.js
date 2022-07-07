@@ -22,12 +22,18 @@ class App extends Component {
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
+
+      let options = {
+        fromBlock: 0,                  //Number || "earliest" || "pending" || "latest"
+        toBlock: 'latest'
+      };
+      const listAddress = await instance.getPastEvents('dataStored', options);
       const response = await instance.methods.get().call();
 
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ storageValue: response, web3, accounts, contract: instance});
+      this.setState({ storageValue: response, web3, accounts, contract: instance, addresses:listAddress });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -36,16 +42,21 @@ class App extends Component {
       console.error(error);
     }
   };
-  
-
 
   runSet = async () => {
     const { accounts, contract} = this.state;
     let valeur=document.getElementById("valeur").value;
     await contract.methods.set(valeur).send({ from: accounts[0] });
     const response = await contract.methods.get().call();
-    this.setState({storageValue:response});
-  }
+
+    // getting the events  
+    let options = {
+      fromBlock: 0,                  //Number || "earliest" || "pending" || "latest"
+      toBlock: 'latest'
+    };
+    const listAddress = await contract.getPastEvents('dataStored', options);
+    this.setState({ storageValue: response, addresses:listAddress });
+    };
 
   render() {
     if (!this.state.web3) {
@@ -63,10 +74,15 @@ class App extends Component {
         <input type="text" id="valeur" />
         <button onClick={this.runSet}>Set the value you wrote inside the blockchain</button>
         <br />
+        <p>Here is the addresses that interacted with the contract, and the value they put</p>
+        <table>
+        {this.state.addresses.map((addresse) => (
+          <tr><td>{addresse.returnValues.addr}</td><td>{addresse.returnValues.data}</td></tr>
+        ))}
+        </table>
       </div>
     );
   }
-
 }
 
 export default App;
