@@ -44,7 +44,7 @@ async function main() {
     await Contract.methods.store(33300000000).send({ from: '0x1Bf9Ee786B600A294DFd0151D1aF027a286A8f4B' });
     Contract.methods.retrieve().call().then(console.log);
     
-    process.exit();
+    // process.exit();
     }
     
 
