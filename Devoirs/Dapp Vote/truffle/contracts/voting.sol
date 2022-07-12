@@ -3,6 +3,24 @@
 pragma solidity 0.8.9;
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
+/**
+ * @dev Informations
+ *
+ * If you have any questions, don't hesitate to contact me on telegram 
+ * #theblockdev or by email : frenchcryptoagency#gmail.com
+ *
+ * This contract is a simplified voting system divided into four parts.
+ *
+ * First, the owner registers the participants
+ * Second, voters can register proposals
+ * Then, the voters vote for their favorite proposal
+ * Finally, the owner tallies the votes. 
+ *
+ * To separate these different phases, we use the enum of the contract,
+ * only the owner can change the enum. 
+ *
+ *
+ */
 
 contract Voting is Ownable {
 
@@ -32,6 +50,11 @@ contract Voting is Ownable {
     Proposal[] proposalsArray;
     mapping (address => Voter) voters;
 
+/**
+* @dev in order to make appear the elements necessary 
+* to the good progress of the vote on our Dapp, we will 
+* use the various events below.
+ */
 
     event VoterRegistered(address voterAddress); 
     event WorkflowStatusChange(WorkflowStatus previousStatus, WorkflowStatus newStatus);
