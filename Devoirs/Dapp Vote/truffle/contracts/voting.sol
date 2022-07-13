@@ -19,7 +19,8 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  * To separate these different phases, we use the enum of the contract,
  * only the owner can change the enum. 
  *
- *
+ * WARNING : In order to avoid a DOS flaw, we have added a proposal limit.
+ * Make sure that this limit matches the use you want to make with this voting system. 
  */
 
 contract Voting is Ownable {
@@ -51,9 +52,9 @@ contract Voting is Ownable {
     mapping (address => Voter) voters;
 
 /**
-* @dev in order to make appear the elements necessary 
-* to the good progress of the vote on our Dapp, we will 
-* use the various events below.
+ * @dev in order to make appear the elements necessary 
+ * to the good progress of the vote on our Dapp, we will 
+ * use the various events below.
  */
 
     event VoterRegistered(address voterAddress); 
@@ -66,9 +67,10 @@ contract Voting is Ownable {
         _;
     }
     
-    // on peut faire un modifier pour les états
-
-    // ::::::::::::: GETTERS ::::::::::::: //
+/**
+ * // ::::::::::::: GETTERS ::::::::::::: //
+ * Voters can get the voters and get the proposals
+ */
 
     function getVoter(address _addr) external onlyVoters view returns (Voter memory) {
         return voters[_addr];
@@ -78,8 +80,10 @@ contract Voting is Ownable {
         return proposalsArray[_id];
     }
 
- 
-    // ::::::::::::: REGISTRATION ::::::::::::: // 
+ /**
+ * // ::::::::::::: REGISTRATION ::::::::::::: //
+ * @dev registrates voters and put their isRegisered on true
+ */
 
     function addVoter(address _addr) external onlyOwner {
         require(workflowStatus == WorkflowStatus.RegisteringVoters, 'Voters registration is not open yet');
@@ -89,12 +93,14 @@ contract Voting is Ownable {
         emit VoterRegistered(_addr);
     }
  
-
-    // ::::::::::::: PROPOSAL ::::::::::::: // 
+/**
+ * // ::::::::::::: PROPOSAL ::::::::::::: // 
+ * Voters add Proposals, but there is a limit of proposals to avoid DOS
+ */    
 
     function addProposal(string memory _desc) external onlyVoters {
         require(workflowStatus == WorkflowStatus.ProposalsRegistrationStarted, 'Proposals are not allowed yet');
-        require(keccak256(abi.encode(_desc)) != keccak256(abi.encode("")), 'Vous ne pouvez pas ne rien proposer'); // facultatif
+        require(keccak256(abi.encode(_desc)) != keccak256(abi.encode("")), 'Vous ne pouvez pas ne rien proposer');
         require(proposalsArray.length<100, "Proposal's Array is complete");
 
         Proposal memory proposal;
@@ -103,12 +109,15 @@ contract Voting is Ownable {
         emit ProposalRegistered(proposalsArray.length-1);
     }
 
-    // ::::::::::::: VOTE ::::::::::::: //
+/**
+ * // ::::::::::::: VOTE ::::::::::::: //
+ * Voters set their vote
+ */
 
     function setVote( uint _id) external onlyVoters {
         require(workflowStatus == WorkflowStatus.VotingSessionStarted, 'Voting session havent started yet');
         require(voters[msg.sender].hasVoted != true, 'You have already voted');
-        require(_id < proposalsArray.length, 'Proposal not found'); // pas obligé, et pas besoin du >0 car uint
+        require(_id < proposalsArray.length, 'Proposal not found');
 
         voters[msg.sender].votedProposalId = _id;
         voters[msg.sender].hasVoted = true;
@@ -117,16 +126,18 @@ contract Voting is Ownable {
         emit Voted(msg.sender, _id);
     }
 
-    // ::::::::::::: STATE ::::::::::::: //
+/**
+ * // ::::::::::::: STATE ::::::::::::: //
+ * @dev the owner is in charge of the state change
+ */    
 
-
-    function NextStatut() external onlyOwner {                                 //fonction pour définir le workflowStatus du contrat
+    function state() external onlyOwner {                                
         if (workflowStatus==WorkflowStatus.VotesTallied){
             workflowStatus=WorkflowStatus(0);
         }
         else workflowStatus=WorkflowStatus(uint(workflowStatus)+1);   
     
-        if (workflowStatus==WorkflowStatus.RegisteringVoters) {                //déclenchement de l'event 
+        if (workflowStatus==WorkflowStatus.RegisteringVoters) {               
             emit WorkflowStatusChange(WorkflowStatus(5),WorkflowStatus(0));
         }
         else {
@@ -134,6 +145,10 @@ contract Voting is Ownable {
             }
     }
 
+/**
+ * // ::::::::::::: TALLY ::::::::::::: //
+ * @dev the owner is in charge of counting the votes
+ */
 
    function tallyVotes() external onlyOwner {
        require(workflowStatus == WorkflowStatus.VotingSessionEnded, "Current status is not voting session ended");
