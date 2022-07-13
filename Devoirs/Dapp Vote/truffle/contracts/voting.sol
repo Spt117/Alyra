@@ -1,30 +1,29 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity 0.8.9;
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @dev Informations
+ * @title A voting system on the blockchain
  *
- * If you have any questions, don't hesitate to contact me on telegram 
- * #theblockdev or by email : frenchcryptoagency#gmail.com
+ * @author Jean-Baptiste Fund -> telegram : @theblockdev - email : frenchcryptoagency@gmail.com
  *
- * This contract is a simplified voting system divided into four parts.
+ * @notice This contract is a simplified voting system divided into four parts :<br>
  *
- * First, the owner registers the participants
- * Second, voters can register proposals
- * Then, the voters vote for their favorite proposal
- * Finally, the owner tallies the votes. 
+ * First, the owner registers the participants<br>
+ * Second, voters can register proposals<br>
+ * Then, the voters vote for their favorite proposal<br>
+ * Finally, the owner tallies the votes. <br>
+ *<br>
+ * To separate these different phases, we use the enum of the contract, only the owner can change the enum. <br>
  *
- * To separate these different phases, we use the enum of the contract,
- * only the owner can change the enum. 
- *
- * WARNING : In order to avoid a DOS flaw, we have added a proposal limit.
- * Make sure that this limit matches the use you want to make with this voting system. 
+ * WARNING : In order to avoid a DOS flaw, we have added a proposal limit. Make sure that this limit matches the use you want to make with this voting system. 
  */
 
 contract Voting is Ownable {
 
+/**
+ * @dev winningProposalID is the winning proposal of the vote 
+ */
     uint public winningProposalID;
     
     struct Voter {
@@ -38,6 +37,7 @@ contract Voting is Ownable {
         uint voteCount;
     }
 
+
     enum  WorkflowStatus {
         RegisteringVoters,
         ProposalsRegistrationStarted,
@@ -47,15 +47,12 @@ contract Voting is Ownable {
         VotesTallied
     }
 
+/**
+ * @dev workflowStatus is the status of voting 
+ */
     WorkflowStatus public workflowStatus;
     Proposal[] proposalsArray;
     mapping (address => Voter) voters;
-
-/**
- * @dev in order to make appear the elements necessary 
- * to the good progress of the vote on our Dapp, we will 
- * use the various events below.
- */
 
     event VoterRegistered(address voterAddress); 
     event WorkflowStatusChange(WorkflowStatus previousStatus, WorkflowStatus newStatus);
@@ -68,21 +65,27 @@ contract Voting is Ownable {
     }
     
 /**
- * // ::::::::::::: GETTERS ::::::::::::: //
- * Voters can get the voters and get the proposals
+ * @dev Only voters can call getVoter
+ * @param _addr is the address of the voter
+ * @return voters is the struct of the voter
  */
 
     function getVoter(address _addr) external onlyVoters view returns (Voter memory) {
         return voters[_addr];
     }
     
+/**
+ * @dev Only voters can call getOneProposal
+ * @param _id is the id of the proposal
+ * @return proposalsArray is the struct of the proposal
+ */    
     function getOneProposal(uint _id) external onlyVoters view returns (Proposal memory) {
         return proposalsArray[_id];
     }
 
- /**
- * // ::::::::::::: REGISTRATION ::::::::::::: //
- * @dev registrates voters and put their isRegisered on true
+/**
+ * @dev Only owner can add a voter
+ * @param _addr is the address of the voter
  */
 
     function addVoter(address _addr) external onlyOwner {
@@ -94,8 +97,8 @@ contract Voting is Ownable {
     }
  
 /**
- * // ::::::::::::: PROPOSAL ::::::::::::: // 
- * Voters add Proposals, but there is a limit of proposals to avoid DOS
+ * @dev Only voters can add a proposal
+ * @param _desc is the description of the proposal
  */    
 
     function addProposal(string memory _desc) external onlyVoters {
@@ -110,9 +113,9 @@ contract Voting is Ownable {
     }
 
 /**
- * // ::::::::::::: VOTE ::::::::::::: //
- * Voters set their vote
- */
+ * @dev Only voters can set a vote
+ * @param _id is the id of the proposal
+ */ 
 
     function setVote( uint _id) external onlyVoters {
         require(workflowStatus == WorkflowStatus.VotingSessionStarted, 'Voting session havent started yet');
@@ -127,11 +130,10 @@ contract Voting is Ownable {
     }
 
 /**
- * // ::::::::::::: STATE ::::::::::::: //
- * @dev the owner is in charge of the state change
+ * @dev Only owner can change the state
  */    
 
-    function state() external onlyOwner {                                
+    function changeState() external onlyOwner {                                
         if (workflowStatus==WorkflowStatus.VotesTallied){
             workflowStatus=WorkflowStatus(0);
         }
@@ -146,8 +148,7 @@ contract Voting is Ownable {
     }
 
 /**
- * // ::::::::::::: TALLY ::::::::::::: //
- * @dev the owner is in charge of counting the votes
+ * @dev Only owner can change the state
  */
 
    function tallyVotes() external onlyOwner {
