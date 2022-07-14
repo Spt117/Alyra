@@ -9,7 +9,6 @@
     "@truffle/hdwallet-provider": "^2.0.10",
     "dotenv": "^16.0.1"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "truffle test"
   },
