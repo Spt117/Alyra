@@ -3,6 +3,8 @@ import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 
 import "./App.css";
+import "./Addresse"
+import Address from "./Addresse";
 
 class App extends Component {
   state = { storageValue: 0, web3: null, accounts: null, contract: null, addresses: null };
@@ -64,6 +66,7 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <Address addr={this.state.accounts}/>
         <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
         <h2>Smart Contract Example</h2>
