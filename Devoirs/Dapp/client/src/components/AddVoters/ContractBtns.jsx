@@ -11,10 +11,10 @@ function ContractBtns({ setValue }) {
     }
   };
 
-  const read = async () => {
-    const value = await contract.methods.read().call({ from: accounts[0] });
-    setValue(value);
-  };
+  // const read = async () => {
+  //   const value = await contract.methods.read().call({ from: accounts[0] });
+  //   setValue(value);
+  // };
 
   const write = async e => {
     if (e.target.tagName === "INPUT") {
@@ -31,9 +31,9 @@ function ContractBtns({ setValue }) {
   return (
     <div className="btns">
 
-      <button onClick={read}>
+      {/* <button onClick={read}>
         read()
-      </button>
+      </button> */}
 
       <div onClick={write} className="input-btn">
         write(<input
