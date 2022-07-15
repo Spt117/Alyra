@@ -1,5 +1,5 @@
 import useEth from "../contexts/EthContext/useEth";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 // import { useState } from "react";
 
 
@@ -22,6 +22,12 @@ function GetState(){
     //         }
     
     //     }},[]);
+
+    useEffect(() => {
+        const data =  contract.methods.workflowStatus().call({from: accounts[0]});
+        console.log(data);
+    },[]);
+
     async function theState(){
       const data =  await contract.methods.workflowStatus().call({from: accounts[0]});
         console.log(data);
