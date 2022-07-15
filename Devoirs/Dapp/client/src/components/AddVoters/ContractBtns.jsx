@@ -14,6 +14,7 @@ function ContractBtns({ setValue }) {
     }
   };
 
+  // eslint-disable-next-line
   const read = async () => {
     const value = await contract.methods.read().call({ from: accounts[0] });
     setValue(value);
@@ -23,10 +24,10 @@ function ContractBtns({ setValue }) {
     if (e.target.tagName === "INPUT") {
       return;
     }
-    if (inputValue === "") {
-      alert("Please enter a value to write.");
-      return;
-    }
+    // if (inputValue === "") {
+    //   alert("Please enter a value to write.");
+    //   return;
+    // }
     const newValue = parseInt(inputValue);
     await contract.methods.write(newValue).send({ from: accounts[0] });
   };
@@ -42,23 +43,14 @@ function ContractBtns({ setValue }) {
 
 
   return (
-    <div className="btns">
-
-      {/* <button onClick={read}>
-        read()
-      </button> */}
+    
 
       <div onClick={write} className="input-btn">
-        write(<input
-          type="text"
-          placeholder="uint"
-          value={inputValue}
-          onChange={handleInputChange}
-        />)
+        
         <input type='text' onChange={handleInputText}/>
         <button onClick={handleAddVoter}>AddVoter</button>
         
-      </div>
+      
 
     </div>
   );
