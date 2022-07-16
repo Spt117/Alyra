@@ -2,7 +2,6 @@ import useEth from "../contexts/EthContext/useEth";
 import { useEffect } from "react";
 import { useState } from "react";
 
-
 function GetState() {
     const { state: { contract, accounts } } = useEth();
     const [value, readState] = useState("");
@@ -59,6 +58,7 @@ function GetState() {
                 <div>
                     <p>{value}</p>
                 </div>
+                
             );
         }
     }
