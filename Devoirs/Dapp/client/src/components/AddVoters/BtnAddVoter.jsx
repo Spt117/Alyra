@@ -5,11 +5,11 @@ function BtnAddVoter() {
   const { state: { contract, accounts } } = useEth();
   const [inputTextValue, setInputTextValue] = useState("");
 
-  async function handleAddVoter(){
+  async function addVoter(){
     if(inputTextValue.length === 42){
     await contract.methods.addVoter(inputTextValue).send({from: accounts[0]});
     }
-    else {window.alert("Ceci n'est pas une addresse !")};
+    else {window.alert("This isn't an adress !")};
   
 };
 
@@ -20,7 +20,7 @@ function BtnAddVoter() {
   return (
         <div>
         <input type='text' onChange={handleInputText}/>
-        <button onClick={handleAddVoter}>AddVoter</button>
+        <button onClick={addVoter}>AddVoter</button>
         </div>
   );
 }
