@@ -19,13 +19,28 @@ function GetState(){
         console.log(data);
         readState(workflowStatus[data]);
     }
+
+
+    async function newState(){
+    
+        await contract.methods.changeState().send({from: accounts[0]});
+        
+        if (contract) {
+            contract.getPastEvents('WorkflowStatusChange')
+        }
+        theState();
+      
+    };
     
 
     return(
+        <div><div>
+            <button onClick={newState}>ChangeState</button>
+        </div>
         <div>
         {/* <div><button onClick={theState}>Voir le state</button></div> */}
         <p>{value}</p>
-        </div>
+        </div></div>
     )
     
 }

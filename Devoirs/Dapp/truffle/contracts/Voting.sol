@@ -148,7 +148,7 @@ contract Voting is Ownable {
     }
 
 /**
- * @dev Only owner can change the state
+ * @dev Only owner can tally the votes
  */
 
    function tallyVotes() external onlyOwner {
@@ -160,8 +160,5 @@ contract Voting is Ownable {
           }
        }
        winningProposalID = _winningProposalId;
-       
-       workflowStatus = WorkflowStatus.VotesTallied;
-       emit WorkflowStatusChange(WorkflowStatus.VotingSessionEnded, WorkflowStatus.VotesTallied);
     }
 }
