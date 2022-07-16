@@ -1,8 +1,9 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useState } from "react";
+// import {BigNumber, Contract, providers,} from 'ethers';
 
 function GetVoter(){
-    const { state: { contract, accounts } } = useEth();
+    const { state: { contract, accounts, addresses } } = useEth();
     const [Voter, readaddr] = useState("");
     const [inaddr, setaddr] = useState("");
 
