@@ -1,34 +1,42 @@
 import useEth from "../../contexts/EthContext/useEth";
+import { useEffect } from "react";
+import { useState } from "react";
 import Title from "./Title";
 import Cta from "./Cta";
 import BtnAddVoter from "./BtnAddVoter";
 import Desc from "./Desc";
-import NoticeNoArtifact from "./NoticeNoArtifact";
-import NoticeWrongNetwork from "./NoticeWrongNetwork";
+
 
 function Demo() {
-  const { state } = useEth();
-  
+  const { state: { contract, accounts } } = useEth();
+  const [owner, setOwner] = useState("");
 
-  const demo =
-    <>
+  useEffect(() => {
+    if (contract) {
+      setTheOwner();
+    }
+  });
+
+  async function setTheOwner() {
+    const addr = await contract.methods.owner().call();
+    console.log(owner);
+    setOwner(addr);
+  }
+
+  
+if(contract) {
+  if (owner === accounts[0]) {
+  return (
+    <div>
+      <Title />
       <Cta />
-      <div className="contract-container">
-        <BtnAddVoter/>
+      <div >
+        <BtnAddVoter />
       </div>
       <Desc />
-    </>;
 
-  return (
-    <div className="demo">
-      <Title />
-      {
-        !state.artifact ? <NoticeNoArtifact /> :
-          !state.contract ? <NoticeWrongNetwork /> :
-            demo
-      }
     </div>
-  );
+  );};};
 }
 
 export default Demo;

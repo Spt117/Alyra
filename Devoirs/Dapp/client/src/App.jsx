@@ -1,7 +1,6 @@
 import { EthProvider } from "./contexts/EthContext";
 import MyAddress from "./components/Header";
 import Welcome from "./components/Welcome";
-// import ChangeState from "./components/ChangeState/changeState";
 import GetState from "./components/State";
 import AddVoters from "./components/AddVoters";
 import Proposals from "./components/Proposals";
@@ -22,9 +21,9 @@ function App() {
           <Welcome />
           <hr />
           <AddVoters />
+          <hr />
           <GetVoter />
           <hr />
-          {/* <ChangeState /> */}
           <GetState />
           <hr />
           <Proposals />
