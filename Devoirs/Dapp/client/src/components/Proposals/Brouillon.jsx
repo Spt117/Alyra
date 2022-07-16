@@ -1,21 +1,23 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useState } from "react";
-// import { BigNumber, Contract, providers} from 'ethers';
+import { BigNumber} from 'ethers';
 
 function GetProposal() {
     const { state: { contract, accounts } } = useEth();
     const [value, readProposal] = useState("");
     const [id, setId] = useState("");
 
-    async function proposal() {
+    async function proposal(id) {
         const proposal = await contract.methods.getOneProposal(id).call({from: accounts[0]});
         console.log(proposal);
         readProposal(proposal);
     }
 
     function getId(e) {
-        console.log(e.target.value); 
-        setId(e.target.value);
+        console.log(e);
+        const BN = BigNumber(e.target.value);
+        console.log(BN);
+        setId(BN);
         console.log(id);
     }
 
@@ -23,7 +25,7 @@ function GetProposal() {
         <div>
         <input type='text' onChange={getId}/>    
         <div><button onClick={proposal}>See the proposal by the id</button></div>
-        <p>{value[0]}</p>
+        <p>{value}</p>
         </div>
   );
 
