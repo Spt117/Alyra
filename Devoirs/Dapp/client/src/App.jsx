@@ -1,8 +1,9 @@
 import { EthProvider } from "./contexts/EthContext";
 import IsOwner from "./components/Owner";
 import MyAddress from "./components/Header";
+import WichState from "./components/State";
 import Welcome from "./components/Welcome";
-import State from "./components/State";
+import ChangeState from "./components/ChangeState";
 import AddVoters from "./components/AddVoters";
 import Proposals from "./components/Proposals";
 import GetProposal from "./components/GetProposal";
@@ -15,33 +16,27 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [currentState, nextState] = useState("");
-  const [addrOwner, setOwner] = useState("");
+  const [currentState, nextState] = useState([]);
+  const [addrOwner, setOwner] = useState([]);
 
 
   return (
     <EthProvider>
       <div id="App" >
         <div className="container">
+          <Welcome />
           <IsOwner setOwner={setOwner} />
           <MyAddress />
+          <WichState nextState={nextState} />
           <hr />
-          <Welcome />
-          <hr />
-          <AddVoters />
-          <hr />
+          <AddVoters currentState={currentState} addrOwner={addrOwner} />
           <GetVoter />
-          <hr />
-          <State nextState={nextState} addrOwner={addrOwner}/>
-          <hr />
-          <Proposals currentState={currentState}/>
-          <GetProposal />
-          <hr />
-          <Vote />
-          <hr />
-          <TallyVotes />
-          <GetWinner />
-          <hr />
+          <ChangeState nextState={nextState} addrOwner={addrOwner} />
+          <Proposals currentState={currentState} />
+          <GetProposal currentState={currentState} />
+          <Vote currentState={currentState} />
+          <TallyVotes currentState={currentState} addrOwner={addrOwner} />
+          <GetWinner currentState={currentState} />
           <Footer />
         </div>
       </div>

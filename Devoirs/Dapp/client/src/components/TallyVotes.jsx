@@ -1,39 +1,23 @@
 import useEth from "../contexts/EthContext/useEth";
-import { useState } from "react";
-import { useEffect } from "react";
 
-function TallyVotes() {
+function TallyVotes({ currentState, addrOwner }) {
     const { state: { contract, accounts } } = useEth();
-    const [owner, setOwner] = useState("");
-
-    useEffect(() => {
-        if (contract) {
-            setTheOwner();
-        }
-    });
-
-    async function setTheOwner() {
-        const addr = await contract.methods.owner().call();
-        setOwner(addr);
-    }
 
     async function tallytheVotes() {
-        await contract.methods.tallyVotes().send({from: accounts[0]});
+        await contract.methods.tallyVotes().send({ from: accounts[0] });
     };
 
-   if(contract) {
-    if (owner === accounts[0]){
-        return(
-            <div>
-                <button onClick={tallytheVotes}>Tally the votes !</button>
-            </div>
-        );
+    if (contract) {
+        // eslint-disable-next-line
+        if ((addrOwner === accounts[0]) && (currentState == 4)) {
+            return (
+                <div>
+                    <button onClick={tallytheVotes}>Tally the votes !</button>
+                    <hr />
+                </div>
+            );
+        }
     }
-   }
-   
-   
-    
-
 }
 
 export default TallyVotes;

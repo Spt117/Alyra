@@ -9,13 +9,19 @@ function GetVoter() {
 
     async function getVoter() {
         const address = await contract.methods.getVoter(inaddr).call({ from: accounts[0] });
-        console.log(address);
-        readaddr(address);
+        let voter = ["not registered", "hasn't voted", address[2]]
+
+        if (address[0]) {
+            voter[0] = 'registered';
+        }
+        if (address[1]) {
+            voter[1] = 'has voted the proposal '+ voter[2];
+        }
+        readaddr("This voter is " + voter[0] + " and he " + voter[1]);
     }
 
     function getAddr(e) {
         setaddr(e.target.value);
-        console.log(inaddr);
     }
 
     return (
@@ -24,7 +30,7 @@ function GetVoter() {
             <button onClick={getVoter}>See the voter by using is address</button>
             <p>{Voter}</p>
         </div>
-          {/* <table><tr><td></td></tr></table> */}
+            {/* <table><tr><td></td></tr></table> */}
         </div>
     );
 }

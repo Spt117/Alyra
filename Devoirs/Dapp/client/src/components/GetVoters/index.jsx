@@ -6,6 +6,7 @@ function SetTheVoters() {
         <div>
         
         <GetVoter />
+        <hr />
         </div> 
 
     );

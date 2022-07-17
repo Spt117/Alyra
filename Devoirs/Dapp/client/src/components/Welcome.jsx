@@ -5,6 +5,7 @@ function Welcome() {
       <p>
       We have built our application on the blockchain so that our system is very secure !
       </p>
+      <hr />
     </div>
   );
 }
