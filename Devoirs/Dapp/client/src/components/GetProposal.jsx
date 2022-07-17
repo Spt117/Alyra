@@ -13,7 +13,6 @@ function GetProposal({currentState}) {
 
     function getId(e) {
         setId(e.target.value);
-        console.log(id);
     }
 
     // eslint-disable-next-line

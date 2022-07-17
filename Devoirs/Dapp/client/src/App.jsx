@@ -7,6 +7,7 @@ import ChangeState from "./components/ChangeState";
 import AddVoters from "./components/AddVoters";
 import Proposals from "./components/Proposals";
 import GetProposal from "./components/GetProposal";
+import ProposalsArray from "./components/Proposals/ProposalsArray";
 import GetVoter from "./components/GetVoters";
 import Vote from "./components/Vote";
 import TallyVotes from "./components/TallyVotes";
@@ -34,6 +35,7 @@ function App() {
           <ChangeState nextState={nextState} addrOwner={addrOwner} />
           <Proposals currentState={currentState} />
           <GetProposal currentState={currentState} />
+          <ProposalsArray />
           <Vote currentState={currentState} />
           <TallyVotes currentState={currentState} addrOwner={addrOwner} />
           <GetWinner currentState={currentState} />
