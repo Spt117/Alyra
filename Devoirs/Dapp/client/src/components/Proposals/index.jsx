@@ -1,16 +1,24 @@
 import Setproposal from "./SetProposals";
-import GetProposal from "./GetProposal";
+import useEth from "../../contexts/EthContext/useEth";
 
 
-function SetTheProposals() {
 
-    return(
-        <div>
-        <Setproposal />
-        <GetProposal />
-        </div> 
+function SetTheProposals({currentState}) {
+    const { state: { contract } } = useEth();
 
-    );
+
+    if(contract) {
+        // eslint-disable-next-line
+        if(currentState==1) {
+            return(
+                <div>
+                <Setproposal />
+                </div>
+            );
+        }
+    } 
+
+    
 
 }
 

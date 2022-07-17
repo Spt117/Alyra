@@ -1,6 +1,5 @@
-import useEth from "../../contexts/EthContext/useEth";
+import useEth from "../contexts/EthContext/useEth";
 import { useState } from "react";
-// import { BigNumber, Contract, providers} from 'ethers';
 
 function GetProposal() {
     const { state: { contract, accounts } } = useEth();
@@ -22,7 +21,7 @@ function GetProposal() {
     return (
         <div>
         <input type='text' onChange={getId}/>    
-        <div><button onClick={proposal}>See the proposal by the id</button></div>
+        <button onClick={proposal}>See the proposal by the id</button>
         <p>{value[0]}</p>
         </div>
   );

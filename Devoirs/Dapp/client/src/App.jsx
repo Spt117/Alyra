@@ -1,21 +1,29 @@
 import { EthProvider } from "./contexts/EthContext";
+import IsOwner from "./components/Owner";
 import MyAddress from "./components/Header";
 import Welcome from "./components/Welcome";
-import GetState from "./components/State";
+import State from "./components/State";
 import AddVoters from "./components/AddVoters";
 import Proposals from "./components/Proposals";
+import GetProposal from "./components/GetProposal";
 import GetVoter from "./components/GetVoters";
 import Vote from "./components/Vote";
 import TallyVotes from "./components/TallyVotes";
 import GetWinner from "./components/Winner";
 import Footer from "./components/Footer";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [currentState, nextState] = useState("");
+  const [addrOwner, setOwner] = useState("");
+
+
   return (
     <EthProvider>
       <div id="App" >
         <div className="container">
+          <IsOwner setOwner={setOwner} />
           <MyAddress />
           <hr />
           <Welcome />
@@ -24,9 +32,10 @@ function App() {
           <hr />
           <GetVoter />
           <hr />
-          <GetState />
+          <State nextState={nextState} addrOwner={addrOwner}/>
           <hr />
-          <Proposals />
+          <Proposals currentState={currentState}/>
+          <GetProposal />
           <hr />
           <Vote />
           <hr />

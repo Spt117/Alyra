@@ -14,7 +14,6 @@ function TallyVotes() {
 
     async function setTheOwner() {
         const addr = await contract.methods.owner().call();
-        console.log(owner);
         setOwner(addr);
     }
 
