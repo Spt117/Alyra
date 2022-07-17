@@ -6,10 +6,10 @@ function WichState({ nextState }) {
     const [value, readState] = useState("");
     let workflowStatus = ['Admin is registering voters', 'Proposals registration started', 'Proposals registration ended', 'Voting session started', 'Voting session ended', 'Votes tallied'];
 
-
     useEffect(() => {
         if (contract) {
             theState();
+            event();
         }
     });
 
@@ -17,9 +17,20 @@ function WichState({ nextState }) {
         const data = await contract.methods.workflowStatus().call({ from: accounts[0] });
         readState(workflowStatus[data]);
         nextState(data);
+
     }
 
+    async function event() {
 
+        // const dataState = await contract.getPastEvents('WorkflowStatusChange', options)
+        // nextState(dataState[0].returnValues.newStatus);
+        // console.log(dataState[0].returnValues.newStatus);
+        let options = {
+            fromBlock: 'latest'
+        };
+        contract.events.WorkflowStatusChange(options)
+            .on('data', event => nextState(event.returnValues[1]))
+    }
 
     return (
         <div>
@@ -27,8 +38,6 @@ function WichState({ nextState }) {
         </div>
 
     );
-
-    
 }
 
 export default WichState;

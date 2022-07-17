@@ -5,11 +5,7 @@ function ChangeState({ addrOwner, nextState }) {
 
     async function newState() {
         await contract.methods.changeState().send({ from: accounts[0] }); 
-        let options = {            
-            toBlock: 'latest'
-          };
-        const data = await contract.getPastEvents('WorkflowStatusChange', options)
-        nextState(data[0].returnValues.newStatus);
+        // const data = await contract.methods.workflowStatus().call({ from: accounts[0] });
     };
 
     if (contract) {
