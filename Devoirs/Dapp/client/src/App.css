@@ -11,7 +11,7 @@
   --gray: #999;
   --light-gray: #e0e0e0;
   --dark-gray: #777;
-  background-color: rgb(30,35,41);
+  
 }
 
 #App .container {
@@ -26,7 +26,7 @@ code {
   white-space: pre-wrap;
   padding: 1.2rem 2rem;
   border-radius: 1rem;
-  background-color: var(--light-gray);
+  
   font-size: 1.4rem;
 }
 
@@ -47,7 +47,7 @@ code span.dim-color {
 }
 
 code span.flash {
-  background-color: var(--flash-color);
+  
 }
 
 details {
@@ -106,7 +106,7 @@ hr {
   align-items: center;
   justify-content: space-evenly;
   padding: 0 1rem;
-  background-color: var(--gray);
+
   border-radius: 0 1rem 1rem 0;
 }
 
@@ -116,7 +116,7 @@ hr {
   align-items: center;
   justify-content: center;
   padding: 1rem 0;
-  background-color: var(--light-gray);
+  
   border: none;
   font-size: 1.2rem;
   font-family: monospace;
@@ -124,7 +124,7 @@ hr {
 }
 
 #App .container .demo .contract-container .btns>*:hover {
-  background-color: var(--dark-gray);
+
 }
 
 #App .container .demo .contract-container .btns .input-btn input {
@@ -153,7 +153,7 @@ button {
         text-align: center;
         font-size: 20px;
         padding: 0px;
-        width: 200px;
+        width: 170px;
         height: 50px;
         transition: all 0.5s;
         cursor: pointer;
@@ -170,19 +170,36 @@ input {
 
 td{
   border: solid 2px rgb(73, 73, 73);
+  background-color: rgb(73, 73, 73);
+  /* color:rgb(73, 73, 73); */
  }
 
  th{
   border: solid 25px rgb(73, 73, 73); 
-  text-align: var(--dark-gray) ;
+  background-color: rgb(73, 73, 73);
+  /* text-align: var(--dark-gray) ; */
  }
 
  table{
   text-align: center;
    margin: 0 auto;
-   border: solid 3px rgb(242,169,16)
+   border: solid 3px rgb(242,169,16);
+
+   
  }
 
  .addvoter {
+  text-align: center;
+ }
+
+ /* .tableau{
+  background-color: rgb(148, 37, 37);
+ } */
+
+ body{
+  background-color:  rgb(30,35,41);
+ }
+
+ #Welcome{
   text-align: center;
  }

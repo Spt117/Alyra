@@ -33,7 +33,8 @@ function WichState({ nextState }) {
     }
 
     return (
-        <div>
+        <div className="state">
+            <h2>Status of the voting session</h2>
             <p>{value}</p>
         </div>
 

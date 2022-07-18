@@ -17,9 +17,9 @@ function SetVote() {
     }
 
     return(
-        <div>
-            <input type="text" onChange={addVote}/>
+        <div>            
             <button onClick={vote}>VOTE</button>
+            <input type="text" onChange={addVote}/>
         </div>
     );
 

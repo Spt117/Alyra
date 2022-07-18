@@ -9,14 +9,14 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
  *
  * @notice This contract is a simplified voting system divided into four parts :<br>
  *
- * First, the owner registers the participants<br>
- * Second, voters can register proposals<br>
- * Then, the voters vote for their favorite proposal<br>
- * Finally, the owner tallies the votes. <br>
+ * @dev First, the owner registers the participants<br>
+ * @dev Second, voters can register proposals<br>
+ * @dev Then, the voters vote for their favorite proposal<br>
+ * @dev Finally, the owner tallies the votes. <br>
  *<br>
- * To separate these different phases, we use the enum of the contract, only the owner can change the enum. <br>
+ * @dev To separate these different phases, we use the enum of the contract, only the owner can change the enum. <br>
  *
- * WARNING : In order to avoid a DOS flaw, we have added a proposal limit. Make sure that this limit matches the use you want to make with this voting system. 
+ * @dev WARNING : In order to avoid a DOS flaw, we have added a proposal limit. Make sure that this limit matches the use you want to make with this voting system. 
  */
 
 contract Voting is Ownable {

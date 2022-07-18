@@ -9,12 +9,13 @@ function MyAddress({ addrOwner }) {
                 <div>
                     <div><p>Your address account is {addrOwner}</p></div>
                     <div><p>Your are the admin of this voting session !</p></div>
+                    <hr />
                 </div>
 
             );
         }
         else {
-            return (<div><p>Your address account is {addrOwner}</p></div>);
+            return (<div><p>Your address account is {addrOwner}</p><hr /></div>);
         }
     }
 }
