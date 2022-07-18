@@ -12,14 +12,15 @@ function Demo({ currentState, addrOwner }) {
     // eslint-disable-next-line
     if ((addrOwner === accounts[0]) && (currentState == 0)) {
       return (
-        <div>
+        <div className="addvoter">
+          <hr />
           <Title />
           <Cta />
           <div >
             <BtnAddVoter />
           </div>
           <Desc />
-          <hr />
+          
         </div>
       );
     };

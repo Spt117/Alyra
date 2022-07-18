@@ -4,7 +4,7 @@ function SetTheVoters() {
 
     return(
         <div>
-        
+        <hr />
         <GetVoter />
         <hr />
         </div> 

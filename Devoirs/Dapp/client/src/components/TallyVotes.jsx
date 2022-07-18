@@ -13,7 +13,7 @@ function TallyVotes({ currentState, addrOwner }) {
             return (
                 <div>
                     <button onClick={tallytheVotes}>Tally the votes !</button>
-                    <hr />
+                    
                 </div>
             );
         }

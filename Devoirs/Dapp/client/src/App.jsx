@@ -12,7 +12,6 @@ import GetVoter from "./components/GetVoters";
 import Vote from "./components/Vote";
 import TallyVotes from "./components/TallyVotes";
 import GetWinner from "./components/Winner";
-import Footer from "./components/Footer";
 import "./App.css";
 import { useState } from "react";
 
@@ -27,19 +26,17 @@ function App() {
         <div className="container">
           <Welcome />
           <IsOwner setOwner={setOwner} />
-          <MyAddress />
-          <WichState nextState={nextState} />
-          <hr />
-          <AddVoters currentState={currentState} addrOwner={addrOwner} />
-          <GetVoter />
+          <MyAddress addrOwner={addrOwner} />
+          <WichState nextState={nextState} />          
           <ChangeState nextState={nextState} addrOwner={addrOwner} />
-          <Proposals currentState={currentState} />
-          <GetProposal currentState={currentState} />
-          <ProposalsArray />
           <Vote currentState={currentState} />
           <TallyVotes currentState={currentState} addrOwner={addrOwner} />
+          <AddVoters currentState={currentState} addrOwner={addrOwner} />
           <GetWinner currentState={currentState} />
-          <Footer />
+          <GetVoter />          
+          <Proposals currentState={currentState} />
+          <GetProposal currentState={currentState} />
+          <ProposalsArray />        
         </div>
       </div>
     </EthProvider>

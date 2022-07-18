@@ -7,6 +7,7 @@ function SetTheProposals({ currentState }) {
         return (
             <div>
                 <Setproposal />
+                <hr />
             </div>
         );
     }

@@ -1,26 +1,22 @@
 import useEth from "../contexts/EthContext/useEth";
-import { useState, useEffect } from "react";
 
-function MyAddress() {
+function MyAddress({ addrOwner }) {
     const { state: { contract, accounts } } = useEth();
-    const [addr, setAddress] = useState("");
 
+    if (contract) {
+        if (addrOwner === accounts[0]) {
+            return (
+                <div>
+                    <div><p>Your address account is {addrOwner}</p></div>
+                    <div><p>Your are the admin of this voting session !</p></div>
+                </div>
 
-    useEffect(() => {
-        if(contract){
-            putAddr();
-        }  
-    });
-
-    async function putAddr() {
-
-        const account = await accounts[0];
-        setAddress(account)
-    };
-
-    return (
-        <div><p>Your address account is</p> {addr}</div>
-    );
+            );
+        }
+        else {
+            return (<div><p>Your address account is {addrOwner}</p></div>);
+        }
+    }
 }
 
 export default MyAddress;

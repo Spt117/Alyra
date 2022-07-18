@@ -15,7 +15,7 @@ function GetVoter() {
             voter[0] = 'registered';
         }
         if (address[1]) {
-            voter[1] = 'has voted the proposal '+ voter[2];
+            voter[1] = 'has voted the proposal ' + voter[2];
         }
         readaddr("This voter is " + voter[0] + " and he " + voter[1]);
     }
@@ -25,13 +25,12 @@ function GetVoter() {
     }
 
     return (
-        <div><div>
-            <input type='text' onChange={getAddr} />
+        <div>
             <button onClick={getVoter}>See the voter by using is address</button>
+            <input type='text' onChange={getAddr} />
             <p>{Voter}</p>
         </div>
-            {/* <table><tr><td></td></tr></table> */}
-        </div>
+         
     );
 }
 

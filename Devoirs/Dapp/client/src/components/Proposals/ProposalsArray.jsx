@@ -9,7 +9,7 @@ function ProposalsArray() {
     useEffect(() => {
         if (contract) {
             tableau()
-            // .then
+            getPropo()
         }
     });
 
@@ -26,14 +26,19 @@ function ProposalsArray() {
 
 
     // console.log(Object.keys(propoID))
-
-    // if (contract) {
-    // async function getPropo(i) {
-    //     // for (let i = 0; i < propoID.length; i++) {
-    //         const proposal = await contract.methods.getOneProposal(i).call({ from: accounts[0]});
-    //         readProposal(proposal)
-    //     // }
-    // }}
+    
+    const array = [];
+    
+    function getPropo() {
+        for (let i = 0; i < propoID.length; i++) {
+            const proposal = contract.methods.getOneProposal(i).call({ from: accounts[0]});
+            proposal.then( result =>{
+                array.push(result[0])
+            })
+            
+        }
+    }
+    console.log(array)
 
 
     // console.log(getPropo(0));
@@ -58,11 +63,13 @@ function ProposalsArray() {
                         <tr key={propo.returnValues.proposalId}>
                             <td>{propo.returnValues.proposalId}</td>
                             <td>{propo.returnValues.description}</td>
+                            {/* <td>{array[propo]}</td> */}
                         </tr>
                     ))}
 
                 </tbody>
             </table>
+            <hr />
         </div>
     );
 }

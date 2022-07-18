@@ -17,11 +17,12 @@ function GetWinner({ currentState }) {
     if (currentState == 5) {
         return (
             <div>
+                <hr />
                 <h2>La proposition gagnante est</h2>
                 <p>{value[0]}</p>
                 <p>Avec {value[1]} voix</p>
                 <button onClick={winningProposal}>Voir la proposition gagnante</button>
-                <hr />
+                
             </div>
         );
     }

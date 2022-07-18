@@ -19,8 +19,9 @@ function GetProposal({currentState}) {
     if (!(currentState == 0)) {
         return (
             <div>
-                <input type='text' onChange={getId} />
+                
                 <button onClick={proposal}>See the proposal by the id</button>
+                <input type='text' onChange={getId} />
                 <p>{value[0]}</p>
                 <hr />
             </div>

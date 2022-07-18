@@ -5,23 +5,23 @@ function BtnAddVoter() {
   const { state: { contract, accounts } } = useEth();
   const [inputTextValue, setInputTextValue] = useState("");
 
-  async function addVoter(){
-    if(inputTextValue.length === 42){
-    await contract.methods.addVoter(inputTextValue).send({from: accounts[0]});
+  async function addVoter() {
+    if (inputTextValue.length === 42) {
+      await contract.methods.addVoter(inputTextValue).send({ from: accounts[0] });
     }
-    else {window.alert("This isn't an adress !")};
-  
-};
+    else { window.alert("This isn't an adress !") };
 
-  function handleInputText(e){
+  };
+
+  function handleInputText(e) {
     setInputTextValue(e.target.value);
   }
 
   return (
-        <div>
-        <input type='text' onChange={handleInputText}/>
-        <button onClick={addVoter}>AddVoter</button>
-        </div>
+    <div>
+      <button onClick={addVoter}>AddVoter</button>
+      <input type='text' onChange={handleInputText} />
+    </div>
   );
 }
 
