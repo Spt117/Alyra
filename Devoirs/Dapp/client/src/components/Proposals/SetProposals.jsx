@@ -41,8 +41,8 @@ function Setproposal() {
 
     return (
         <div>
-            <input type='text' onChange={handleInputText} />
             <button onClick={addProposal}>Add a proposal</button>
+            <input type='text' onChange={handleInputText} />            
         </div>
     );
 

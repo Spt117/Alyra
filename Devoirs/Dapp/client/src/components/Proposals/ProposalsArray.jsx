@@ -38,17 +38,14 @@ function ProposalsArray() {
             
         }
     }
-    console.log(array)
 
-
-    // console.log(getPropo(0));
 
     // let ArrayPropo = [];
-
     // console.log(propoID)
-    // console.log(propoID)
-    // console.log(propoID[0])
 
+
+    // eslint-disable-next-line
+if(!propoID.length==0) {
     return (
         <div>
             <table>
@@ -72,6 +69,7 @@ function ProposalsArray() {
             <hr />
         </div>
     );
+}
 }
 
 
