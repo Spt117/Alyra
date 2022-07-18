@@ -1,98 +1,74 @@
-import { useEffect, useState } from "react";
-import useEth from "../../contexts/EthContext/useEth";
+import React, { Component } from "react";
+import Voting from "/home/jb/Projets/Alyra/Devoirs/Dapp/client/src/contracts/Voting.json";
+import getWeb3 from "../getWeb3";
 
-function ProposalsArray() {
-    const { state: { contract } } = useEth();
-    const [propoID, setPropId] = useState("");
+class ProposalsArray extends Component {
+  state = {  web3: null, accounts: null, contract: null, numero: null };
+  
+  componentDidMount = async () => {
+    
+    try {
+      // Get network provider and web3 instance.
+      const web3 = await getWeb3();
 
-    useEffect(() => {
-        if (contract) {
-             tableau()
-        }
-    });
+      // Use web3 to get the user's accounts.
+      const accounts = await web3.eth.getAccounts();
 
-    // async function tableau() {
-    //     let options = {
-    //         fromBlock: 0,                  //Number || "earliest" || "pending" || "latest"
-    //         toBlock: 'latest'
-    //     };
-    //     const listProposals = await contract.getPastEvents('ProposalRegistered', options);
-    //     for (let i = 0; i < listProposals.length; i++) {
-    //         const proposal = await contract.methods.getOneProposal(i).call({ from: accounts[0] });
-    //         console.log(proposal[0]);
-    //         Proposals.push(proposal[0]);
-    //     }
-        
-    // }
-    // const Proposals = [];
+      // Get the contract instance.
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = Voting.networks[networkId];
+      const instance = new web3.eth.Contract(
+        Voting.abi,
+        deployedNetwork && deployedNetwork.address,
+      );
 
+      let options = {
+        fromBlock: 0,                  //Number || "earliest" || "pending" || "latest"
+        toBlock: 'latest'
+      };
 
-    // return(
-    //     <div>
-    //         <ul>
-    //         {Proposals.map((propo, index) => (
-    //             <li key={`${propo}-${index}`} >{propo}</li>
-    //         ))}
-    //         </ul>
-    //         <h3>Tableau</h3>
-    //     </div>
-    // );
+      // let arrayProposals =[];
+
+      const listNumber = await instance.getPastEvents('ProposalRegistered', options);
+    console.log(listNumber);
     
     
-    
-    async function tableau() {
-        let options = {
-            fromBlock: 0,                  //Number || "earliest" || "pending" || "latest"
-            toBlock: 'latest'
-          };
-          const listProposals = await contract.getPastEvents('ProposalRegistered', options);
-          setPropId(listProposals);
-          
-    
-        //   const proposal = await contract.methods.getOneProposal().call({ from: accounts[0] });
-        // console.log(propoID[0].returnValues);
 
-
+      console.log(listNumber.length);
+      // Set web3, accounts, and contract to the state, and then proceed with an
+      // example of interacting with the contract's methods.
+      this.setState({ web3, accounts, contract: instance, numero: listNumber});
+      
+    } catch (error) {
+      // Catch any errors for any of the above operations.
+      alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`,
+      );
+      console.error(error);
     }
-    let x = Object.keys(propoID);
-    // let y = Object.entries(x);
     
-    console.log(x);
+  };
 
-      return(
-                   
-            <table><tr><th>Registered Proposals</th></tr>
-            <tbody>
-            {x.map((propo, index) => (
-                    <tr><td key={`${propo}-${index}`}>{propo}</td><td>{index}</td>
-                    </tr>
-                ))}
-            </tbody>                
-            </table>
-        //     <table>
-        //         <thead>
-        //           <th>ID</th>
-        //           <th>Description</th>
-        //           <th>Nombre de voix</th>
-        //         </thead>
-        //       <tbody>
-        //     {proposals.map(proposal => (
-        //       <tr key={proposal.id}>
-        //         <td>{proposal.proposalId}</td>
-        //         <td>{proposal.desc}</td>
-        //         <td>{proposal.voteCount}</td>
-        //       </tr>
-        //     ))}
-        //   </tbody>
-        // </table>
+  render() {
+    if (!this.state.web3) {
+      return <div>Loading Web3, accounts, and contract...</div>;
+    }
+    
+    return (
+      <div>
         
+        <table>
+        {this.state.numero.map((addresse) => (
+          <tr>
+            <td>{addresse.returnValues.proposalId}</td>
+          <td>{addresse.returnValues.description}</td>
+          </tr>
+        ))}
+        </table>
+      </div>
     );
-
-
-    
-
-    
-
+  }
 }
+
 
 export default ProposalsArray;
