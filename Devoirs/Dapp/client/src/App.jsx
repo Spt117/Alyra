@@ -7,7 +7,7 @@ import Welcome from "./components/Welcome";
 import ChangeState from "./components/ChangeState";
 import AddVoters from "./components/AddVoters";
 import Proposals from "./components/Proposals";
-import GetProposal from "./components/GetProposal";
+// import GetProposal from "./components/GetProposal";
 import ProposalsArray from "./components/Proposals/ProposalsArray";
 import GetVoter from "./components/GetVoters";
 import Vote from "./components/Vote";
