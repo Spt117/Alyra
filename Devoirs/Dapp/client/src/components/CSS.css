@@ -1,14 +1,57 @@
-#addr{
-    background-color: rgb(255,245,218);
+/* span{
     text-align: right;
-    color: #f96400;
-}
-  
- #header{
-      background-color: #1266cc;
+    padding-left: 100px;
+} */
+
+.param{
+    background-color: rgb(35,43,45);
+    height: 60px;
 }
 
-.param-le{
-    background-color: #1266cc;
-    text-align: right;
+.addr{
+    color: rgb(168, 168, 211);
+    float: right;
+    background-color: rgb(249,239,214);
+    margin-top: 10px;
+    margin-right: 15px;
+    padding: 5px;
+    /* width: 300px; */
+    height: auto;
+    border-radius: 10px ;
+    /* display: inline-block; */
 }
+
+p{
+    text-align: center;
+}
+
+#para1{
+    color: rgb(168, 168, 211);
+    
+    background-color: rgb(249,239,214);
+    margin-top: 10px;
+    margin-left: 15px;
+    padding: 5px;
+    width: 300px;
+    border-radius: 10px ;
+    height: 20px;
+    display: inline-block;
+}
+
+#para2{
+    color: rgb(168, 168, 211);
+    
+    background-color: rgb(249,239,214);
+    margin-top: 10px;
+    margin-left: 15px;
+    padding: 5px;
+    width: 300px;
+    border-radius: 10px ;
+    height: 20px;
+    display: inline-block;
+}
+
+
+h3{
+    text-align: center;
+   }

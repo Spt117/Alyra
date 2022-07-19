@@ -1,8 +1,7 @@
-// import { useState } from "react";
-// import useEth from "../../contexts/EthContext/useEth";
 import useEth from "../contexts/EthContext/useEth";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
+import "./CSS.css";
 
 
 function Param( ) {
