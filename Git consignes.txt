@@ -12,11 +12,10 @@ Indexer un fichier : git add
 Enregistrer une nouvelle version d'un fichier : git commit //pour le message, finir par échap puis :x
 
 Relier Git et GItHub : git remote add origin https://liendemonrepositery.git
-Basculer de Master à main : Git branch -M main
+Basculer de Master à main : git branch -M main
 Envoyer la branche mère dans GitHub : git push -u origin main
 Envoyer une autre branche : git push -u https://liendemonrepositery.git
 Envoyer un commit : git push
-
 
 Créer une branche : git branch nombranche
 Supprimer une branche : git branch -d nombranche
@@ -27,7 +26,7 @@ Voir les modifications de côté : git stash list
 Récupérer des modifications : git stash aply IDstash
 
 Lister les commit : git log
-		    git refloggit reflog
+git refloggit reflog
 
 Supprimer de la branche le dernier commit : git reset --hard HEAD^
 Appliquer un commit : git reset --hard idcommit
@@ -36,9 +35,7 @@ Revenir au commit précédent : git revert HEAD
 
 Modifier le message du dernier commit : git commit --amend -m "bon message"
 
-
 Afficher les modifications et auteurs d'un fichier : git blame nomfichier
-
 
 SYNCHRONISER DEUX PC : 
 git fetch
