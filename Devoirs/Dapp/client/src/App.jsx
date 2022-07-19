@@ -39,6 +39,7 @@ function App() {
             <WichState nextState={nextState}  /> 
             <ChangeState nextState={nextState} addrOwner={addrOwner} />
             <AddVoters currentState={currentState} addrOwner={addrOwner} />
+            <GetVoter />
             <TallyVotes currentState={currentState} addrOwner={addrOwner} />
             <Vote currentState={currentState} />
             
@@ -46,7 +47,7 @@ function App() {
             <Proposals currentState={currentState} />
             <GetProposal currentState={currentState} />
             <ProposalsArray />
-            <GetVoter />
+            
           </div>
           {/* <div className="demo">
       {

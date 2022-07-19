@@ -4,19 +4,15 @@ import NoticeWrongNetwork from "./NoticeWrongNetwork";
 import "./CSS.css";
 
 
-function Param( ) {
+function Param() {
   const { state } = useEth();
   // const [value, setValue] = useState("?");
 
   const Params =
     <>
-      
       <div className="contract-container">
-        <h3>You are on the good NetWork !</h3>
-        
+        <h3 className="network">You are on the good NetWork of Voting Dapp !</h3>
       </div>
-     
-      
     </>;
 
   return (
@@ -24,7 +20,7 @@ function Param( ) {
       {
         !state.artifact ? <NoticeNoArtifact /> :
           !state.contract ? <NoticeWrongNetwork /> :
-          Params
+            Params
       }
       <hr />
     </div>
