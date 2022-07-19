@@ -13,14 +13,14 @@ function Demo({ currentState, addrOwner }) {
     if ((addrOwner === accounts[0]) && (currentState == 0)) {
       return (
         <div className="addvoter">
-          <hr />
+          
           <Title />
           <Cta />
           <div >
             <BtnAddVoter />
           </div>
           <Desc />
-          
+          <hr />
         </div>
       );
     };

@@ -16,7 +16,7 @@
 
 #App .container {
   width: 50%;
-  min-width: 60rem;
+  min-width: 100rem;
   max-width: 75rem;
   height: 100%;
 }
@@ -44,10 +44,6 @@ code span.secondary-color {
 
 code span.dim-color {
   color: var(--gray);
-}
-
-code span.flash {
-  
 }
 
 details {
@@ -123,9 +119,6 @@ hr {
   cursor: pointer;
 }
 
-#App .container .demo .contract-container .btns>*:hover {
-
-}
 
 #App .container .demo .contract-container .btns .input-btn input {
   width: 4rem;
@@ -200,6 +193,8 @@ td{
   background-color:  rgb(30,35,41);
  }
 
- #Welcome{
+ .welcome{
   text-align: center;
+  background-color:rgb(43,56,63) ;
+  width: auto;
  }

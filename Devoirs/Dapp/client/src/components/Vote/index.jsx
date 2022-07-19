@@ -6,9 +6,9 @@ function SetTheVote({currentState}) {
     if (currentState == 3) {
         return (
             <div>
-                <hr />
+               
                 <SetVote />
-                
+                <hr />
             </div>
         );
     }

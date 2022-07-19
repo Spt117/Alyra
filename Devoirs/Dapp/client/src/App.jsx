@@ -31,20 +31,22 @@ function App() {
       <EthProvider>
         <div id="App" >
           <div className="container">
+          <MyAddress addrOwner={addrOwner} />
           <Welcome />
           <Param />
             <IsOwner setOwner={setOwner} />
-            <MyAddress addrOwner={addrOwner} />
-            <WichState nextState={nextState} />
+            
+            <WichState nextState={nextState}  /> 
             <ChangeState nextState={nextState} addrOwner={addrOwner} />
-            <Vote currentState={currentState} />
-            <TallyVotes currentState={currentState} addrOwner={addrOwner} />
             <AddVoters currentState={currentState} addrOwner={addrOwner} />
+            <TallyVotes currentState={currentState} addrOwner={addrOwner} />
+            <Vote currentState={currentState} />
+            
             <GetWinner currentState={currentState} />
-            <GetVoter />
             <Proposals currentState={currentState} />
             <GetProposal currentState={currentState} />
             <ProposalsArray />
+            <GetVoter />
           </div>
           {/* <div className="demo">
       {

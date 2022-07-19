@@ -12,9 +12,9 @@ function ChangeState({ addrOwner, nextState }) {
         if (addrOwner === accounts[0]) {
             return (
                 <div>
-                    <hr />
+                    
                     <button onClick={newState}>ChangeState</button>
-                   
+                    <hr />
                 </div>
             );
         }

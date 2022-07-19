@@ -4,7 +4,8 @@ import useEth from "../contexts/EthContext/useEth";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
 
-function Param() {
+
+function Param( ) {
   const { state } = useEth();
   // const [value, setValue] = useState("?");
 
@@ -13,7 +14,9 @@ function Param() {
       
       <div className="contract-container">
         <h3>You are on the good NetWork !</h3>
+        
       </div>
+     
       
     </>;
 
