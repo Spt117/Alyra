@@ -17,7 +17,9 @@ function MyAddress({ addrOwner }) {
             );
         }
         else {
-            return (<div><span className="addr">{addrOwner}</span>
+            return (
+            <div className="param">
+                <span className="addr">{addrOwner}</span>
                 <p id="para1">You are not the admin.</p>
                 <hr />
             </div>

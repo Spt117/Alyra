@@ -4,7 +4,7 @@
 }
 
 .addr{
-    color: rgb(168, 168, 211);
+    color: rgb(0, 0, 0);
     float: right;
     background-color: rgb(249,239,214);
     margin-top: 10px;
@@ -21,7 +21,7 @@ p{
 }
 
 #para1{
-    color: rgb(168, 168, 211);
+    color: rgb(0, 0, 0);
     
     background-color: rgb(249,239,214);
     margin-top: 10px;

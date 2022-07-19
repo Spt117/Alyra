@@ -45,7 +45,7 @@ function App() {
             
             <GetWinner currentState={currentState} />
             <Proposals currentState={currentState} />
-            <GetProposal currentState={currentState} />
+            {/* <GetProposal currentState={currentState} /> */}
             <ProposalsArray />
             
           </div>
