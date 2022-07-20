@@ -37,4 +37,4 @@ var  Contract  =  new  web3.eth.Contract(abi, addr);
 console.log(Contract);
 
 // FUNCTION must the name of the function you want to call. 
-Contract.methods.retrieve().call().then(console.log);
+Contract.methods.retrieve().call().then(console.log); 
