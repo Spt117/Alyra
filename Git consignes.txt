@@ -37,6 +37,13 @@ Modifier le message du dernier commit : git commit --amend -m "bon message"
 
 Afficher les modifications et auteurs d'un fichier : git blame nomfichier
 
-SYNCHRONISER DEUX PC : 
+SYNCHRONISER DEUX PC avec un nouveau repo : 
+
+git init 
+git remote add origin git@github.com:Spt117/"nouveaurepo".git
+# start the ssh-agent in the background
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/"nom du fichier contenant la clé"
+
 git fetch
-git pull
+git pull origin "master ou main"
