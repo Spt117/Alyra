@@ -1,0 +1,69 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0x8b56524C9C08Dd114258123b1657A2a76829372e",
+    "txHash": "0x068e93b5143b4203dc54afa8e1e299194a67a29ecb146fcf9ca691579681a6c8"
+  },
+  "proxies": [
+    {
+      "address": "0xcc762897E7aD71ad392D6b09B618eE48D0D83a8D",
+      "txHash": "0xc8ff48a763584ac19687b45ecc9b30ade5de6f7eb8744cc17a32756f2104d7a8",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x3E070cf6445e06B1A5eEdF628132b05f0e7C1415",
+      "txHash": "0x11866c43d4d2905f1ff954ba250e536657419c87967ba571cd3fabde6c91d0f6",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x390fEf9206644749fc2E2F3753Dd589A7C459460",
+      "txHash": "0x04588b1d7d6b3d0c11dff0b78b46e3da4dff1b8d9f198a68e1bedb492912f92f",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xdacF5992B18aE622f0Ff28B9470E1b904CA22d53",
+      "txHash": "0x3b6fa8c42aa8b8788972e03a89e5e2a21f3b8bda4a50c7b7dbdf70c47d528d69",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "4654c37bc655e3cf36ea0e28dae69ef2bc7db665f3643462fccb633da87855da": {
+      "address": "0x9Ed46b331d1f97d19ff9514044927AAb579BF082",
+      "txHash": "0x4239a29181af4204a65eb301172b7c6f589cea6b9a3b0f802ee0500e4ff6ea48",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Simple1",
+            "label": "x",
+            "type": "t_uint256",
+            "src": "../project:/contracts/Simple1.sol:8"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          }
+        }
+      }
+    },
+    "bef8add004c793f7da624ac833a7997723f097286d7b1d3506ecf0257b8b8880": {
+      "address": "0x9dD33A778F4A57849bE67c88D488Ce079Ae75cd3",
+      "txHash": "0x6e5ff476c44fb45c4ae88c59e62d8a2c80cd521cb40e061702110c0d82818bc2",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Simple2",
+            "label": "x",
+            "type": "t_uint256",
+            "src": "../project:/contracts/Simple2.sol:8"
+          }
+        ],
+        "types": {
+          "t_uint256": {
+            "label": "uint256"
+          }
+        }
+      }
+    }
+  }
+}
