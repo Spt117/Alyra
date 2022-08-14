@@ -1,7 +1,7 @@
  // SPDX-License-Identifier: GPL-3.0
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 contract Notes is Ownable{
 
