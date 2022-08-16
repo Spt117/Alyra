@@ -2,7 +2,7 @@
 
 pragma solidity 0.8.14;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "../../../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
 
 contract Voting is Ownable {
