@@ -16578,10 +16578,16 @@
       "links": {},
       "address": "0x307BD5d80Eda24F8EbB88B79bd4c79fcb75cb4A6",
       "transactionHash": "0x5669193b66df7d1e2dcda3683adff5871827590ef31d8a0ddd9c92b366a7c900"
+    },
+    "1660732666906": {
+      "events": {},
+      "links": {},
+      "address": "0xbc5D54bb74Fc4988c4B1e89ADa6059394fe6Af85",
+      "transactionHash": "0x047089e7987037b10aed88af4e6ee56190d5036ad35ca85a03c1f0ca6513dac7"
     }
   },
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-08-17T10:30:29.182Z",
+  "updatedAt": "2022-08-17T10:37:54.721Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Jean-Baptiste Fund -> telegram : @theblockdev - email : frenchcryptoagency@gmail.com",
