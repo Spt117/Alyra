@@ -16338,11 +16338,24 @@
           ],
           "name": "WorkflowStatusChange",
           "type": "event"
+        },
+        "0x92e393e9b54e2f801d3ea4beb0c5e71a21cc34a5d34b77d0fb8a3aa1650dc18f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "proposalId",
+              "type": "uint256"
+            }
+          ],
+          "name": "ProposalRegistered",
+          "type": "event"
         }
       },
       "links": {},
-      "address": "0x52A8D26DCED9Ac208c649eDcD4d486D8aC41fC74",
-      "transactionHash": "0xbd9207066070a285d632397f3ec0b06d44473725556c3558a4ce7eeadac3165a"
+      "address": "0x770C9e957393169a8F33b8ba02e195aaD4441Bcc",
+      "transactionHash": "0x7d21696172f6158d358c28ce2b7c881cbd852556dae72a520d1b432f3cd6aa93"
     },
     "1658218986136": {
       "events": {},
@@ -16547,10 +16560,28 @@
       "links": {},
       "address": "0x4522A659Ced73F452e69aEbA908C0900C0128CA6",
       "transactionHash": "0x6281d9df07f2f3177af5139febe386bf31c316cb41673f2dba74d6774821fe49"
+    },
+    "1660728689120": {
+      "events": {},
+      "links": {},
+      "address": "0xac1714AAB790A6C327B2158802D604206a031af1",
+      "transactionHash": "0x03efe5a7adac8037f98e3fc1b511831477ad53e379d8aac86846de3c63835ca3"
+    },
+    "1660732038869": {
+      "events": {},
+      "links": {},
+      "address": "0x7f745a67FC26E229a398534e7fE71Af63aaE4Cd8",
+      "transactionHash": "0x3b6c3a0482f021980035eb0e838343dc322489fb4fc4982bae0db2e8925da013"
+    },
+    "1660732218256": {
+      "events": {},
+      "links": {},
+      "address": "0x307BD5d80Eda24F8EbB88B79bd4c79fcb75cb4A6",
+      "transactionHash": "0x5669193b66df7d1e2dcda3683adff5871827590ef31d8a0ddd9c92b366a7c900"
     }
   },
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-08-13T21:36:29.859Z",
+  "updatedAt": "2022-08-17T10:30:29.182Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Jean-Baptiste Fund -> telegram : @theblockdev - email : frenchcryptoagency@gmail.com",

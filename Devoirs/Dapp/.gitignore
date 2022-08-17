@@ -6,7 +6,8 @@ node_modules
 .pnp.js
 
 # Production
-build   
+build
+client/src/contracts
 client/*/src/contracts
 
 # Testing
@@ -28,5 +29,3 @@ coverage
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-Brouillons
