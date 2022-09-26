@@ -4,16 +4,23 @@ import useEth from "../../contexts/EthContext/useEth";
 function ProposalsArray() {
     const { state: { contract, accounts } } = useEth();
     const [propoID, setPropId] = useState([]);
+    const [propoID2, setPropId2] = useState([]);
 
     useEffect(() => {
         if (contract) {
             tableau()
+        }// eslint-disable-next-line
+    }, [accounts, contract,propoID2]);
+
+    useEffect(() => {
+        if (contract) {
+            event();    
         }
     });
 
     async function tableau() {
 
-        const listProposals = await contract.getPastEvents('ProposalRegistered', {fromBlock : 0, toBlock:  'latest'});
+        const listProposals = await contract.getPastEvents('ProposalRegistered', {fromBlock : 0});
         // const test = listProposals.map((e) => e.returnValues.proposalId);
         let idsPropo = [];
         let proposals = [];
@@ -30,6 +37,15 @@ function ProposalsArray() {
         }
         setPropId(proposals);
     }
+
+    async function event() {
+        let options = {
+          fromBlock: 'latest'
+        };
+        contract.events
+          .ProposalRegistered(options)
+          .on("data", (event) => setPropId2(event.returnValues.proposalId));
+      }
 
     // eslint-disable-next-line
     if (!propoID.length == 0) {

@@ -36,7 +36,7 @@ function App() {
           <Param />
             <IsOwner setOwner={setOwner} />
             
-            <WichState nextState={nextState}  /> 
+            <WichState nextState={nextState} currentState={currentState} /> 
             <ChangeState nextState={nextState} addrOwner={addrOwner} />
             <AddVoters currentState={currentState} addrOwner={addrOwner} />
             <GetVoter />
