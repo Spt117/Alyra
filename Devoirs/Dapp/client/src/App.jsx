@@ -16,6 +16,7 @@ import GetWinner from "./components/Winner";
 import "./App.css";
 import { useState } from "react";
 import Param from "./components/Param";
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 function App() {
   const [currentState, nextState] = useState([]);
