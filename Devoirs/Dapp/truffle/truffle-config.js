@@ -18,9 +18,9 @@ module.exports = {
     provider : function() {return new HDWalletProvider({mnemonic:{phrase:`${process.env.MNEMONIC}`},providerOrUrl:`https://kovan.infura.io/v3/${process.env.INFURA_ID}`})},
     network_id:42,
   },
-  mumbai:{
-    provider : function() {return new HDWalletProvider({mnemonic:{phrase:`${process.env.MNEMONIC}`},providerOrUrl:`https://rpc-mumbai.maticvigil.com`})},
-    network_id:80001,
+  goerli:{
+    provider : function() {return new HDWalletProvider({mnemonic:{phrase:`${process.env.MNEMONIC}`},providerOrUrl:`https://goerli.infura.io/v3/${process.env.INFURA_ID}`})},
+    network_id:5,
     gasPrice: 7000000000,
   },
 },
