@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity 0.8.14; 
+pragma solidity 0.8.16;
 
 contract StructStore {
     mapping(uint256 => User) users;
@@ -24,19 +24,25 @@ contract StructStore {
     }
 
     // Sets a piece of data by index
-    function setData(uint256 _id, uint256 _index, string memory _newData) public {
+    function setData(
+        uint256 _id,
+        uint256 _index,
+        string memory _newData
+    ) public {
         users[_id].data[_index] = _newData;
     }
 
     // Solidity can't return string arrays. So we'll have to provide the _dataIndex
     // Of the piece of data we want
-    function getUserData(uint256 _id, uint256 _dataIndex) public view returns (string memory) {
+    function getUserData(
+        uint256 _id,
+        uint256 _dataIndex
+    ) public view returns (string memory) {
         return users[_id].data[_dataIndex];
     }
 
     // Returns the amount of strings in a User's data array
     function getDataSize(uint256 _id) public view returns (uint256) {
-        return users[_id].data.length;        
+        return users[_id].data.length;
     }
-    
-    }
+}
